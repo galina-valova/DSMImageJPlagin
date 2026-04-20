@@ -17,7 +17,7 @@ The implementation in this plugin is adapted for ROI-based analysis in ImageJ.
 
 ## Requirements
 - ImageJ 1.x
-- Java 8+
+- Java 25
 
 ## Usage
 1. Open an image in ImageJ
