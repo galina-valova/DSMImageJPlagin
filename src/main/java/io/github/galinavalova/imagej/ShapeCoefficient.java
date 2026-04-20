@@ -54,10 +54,14 @@ public class ShapeCoefficient implements PlugIn {
         double xCenter = sumX / roiPixelsNumber;
         double yCenter = sumY / roiPixelsNumber;
         double maxLength = getMaxLength(roi, xCenter, yCenter);
-        double shapeCoefficient = roiPixelsNumber / maxLength;
+        double shapeCoefficient = 100 * sigmoid(10 * (roiPixelsNumber / maxLength - 1));
 
         showResultTable(roiPixelsNumber, shapeCoefficient);
         }
+
+    private static double sigmoid(double x){
+        return 1 / (1 + Math.exp(-x));
+    }
 
     private static double getMaxLength(Roi roi, double xCenter, double yCenter) {
         Polygon boundary = roi.getPolygon();
@@ -81,7 +85,7 @@ public class ShapeCoefficient implements PlugIn {
         ResultsTable resultTable = ResultsTable.getResultsTable();
         resultTable.incrementCounter();
         resultTable.addValue("ROI area (px)", area);
-        resultTable.addValue("Shape coefficient", coefficient);
+        resultTable.addValue("Dimensionless shape coefficient", coefficient);
         resultTable.show("Results");
 
     }
